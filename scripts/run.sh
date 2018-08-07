@@ -29,3 +29,28 @@ wget https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get
 ./get
 
 kube_config=$(terraform output -json kube_config | jq '.value' | tr -d '"')
+
+echo -e "$kube_config">$HOME/.kube/kube.config
+
+$KUBECONFIG_old=$KUBECONFIG
+
+export KUBECONFIG=$HOME/.kube/kube.config
+
+helm init
+helm init --upgrade
+
+acr_server=$(terraform output -json acr_server | jq '.value' | tr -d '"')
+acr_username=$(terraform output -json acr_username | jq '.value' | tr -d '"')
+acr_password=$(terraform output -json acr_password | jq '.value' | tr -d '"')
+
+sudo service docker start
+sudo docker pull nginx
+sudo docker login --username $acr_username --password $acr_password
+sudo docker tag nginx "$acr_username/$acr_server/examples/nginx"
+sudo docker push "$acr_username/$acr_server/examples/nginx"
+
+sed -i "s|{imagelocation}|$acr_server|g" ./example/values.yaml
+
+helm install ./example
+
+export KUBECONFIG=$KUBECONFIG_old

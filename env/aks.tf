@@ -1,8 +1,8 @@
 resource "azurerm_azuread_application" "demo" {
   name                       = "${var.resource_name}${random_id.demo.dec}"
-  homepage                   = "http://homepage"
-  identifier_uris            = ["http://uri"]
-  reply_urls                 = ["http://replyurl"]
+  homepage                   = "http://homepage${random_id.demo.dec}"
+  identifier_uris            = ["http://uri${random_id.demo.dec}"]
+  reply_urls                 = ["http://replyurl${random_id.demo.dec}"]
   available_to_other_tenants = false
   oauth2_allow_implicit_flow = true
 }
