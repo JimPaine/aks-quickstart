@@ -5,11 +5,11 @@ ssh-keygen -t rsa -C "email@email.com" -N "somepassphrase" -f id_rsa
 public_key=$(<id_rsa.pub)
 # private key into keyvault?
 
-resource_name=""
-subscription_id=""
-client_id=""
-client_secret=""
-tenant_id=""
+resource_name=$1
+subscription_id=$2
+client_id=$3
+client_secret=$4
+tenant_id=$5
 
 az account set --subscription $subscription_id
 
