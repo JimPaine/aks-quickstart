@@ -6,7 +6,7 @@ Using this repo and a combination of steps in VSTS you can automate the process 
 
 ![architecture](https://raw.githubusercontent.com/JimPaine/images/master/architecture.PNG)
 
-## Step 1 - Create a Service Principal
+## Step 1 - Create a Service Principal and set permissions
 
 This will be used to run the Terraform client which will provision the resources in the required environment.
 
@@ -29,6 +29,10 @@ Still on the Required permissions pane click grant permissions (You will need to
 ![grant](https://raw.githubusercontent.com/JimPaine/images/master/grant.PNG)
 
 Go back to the Overview pane of Active directory, select properties and make note of the Directory ID (Also know as the tenant ID).
+
+### Enusre access to create permissions on the subscription
+
+You will also need to update the subscription to give the new Service Principcal access to create resources. In the portal go to subscriptions -> Access Control (IAM)
 
 ## Step 2 - Fork or clone this GitHub repo
 
