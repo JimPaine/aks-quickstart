@@ -44,3 +44,15 @@ resource "azurerm_key_vault_secret" "acrpassword" {
   value     = "${azurerm_container_registry.demo.admin_password}"
   vault_uri = "${azurerm_key_vault.demo.vault_uri}"
 }
+
+resource "azurerm_key_vault_secret" "sshpublickey" {
+  name      = "sshpublickey"
+  value     = "${var.public_key}"
+  vault_uri = "${azurerm_key_vault.demo.vault_uri}"
+}
+
+resource "azurerm_key_vault_secret" "sshprivatekey" {
+  name      = "sshprivatekey"
+  value     = "${var.private_key}"
+  vault_uri = "${azurerm_key_vault.demo.vault_uri}"
+}

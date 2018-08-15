@@ -4,6 +4,7 @@
 
 ssh-keygen -t rsa -C "email@email.com" -N "somepassphrase" -f id_rsa
 public_key=$(<id_rsa.pub)
+private_key=$(<id_rsa)
 # private key into keyvault?
 
 resource_name=$1
@@ -22,6 +23,7 @@ terraform apply -auto-approve \
     -var "client_secret=$client_secret" \
     -var "tenant_id=$tenant_id" \
     -var "public_key=$public_key" \
+    -var "private_key=$private_key" \
     ../env
 
 # install helm and teller
