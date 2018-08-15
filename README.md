@@ -4,7 +4,7 @@ Using this repo and a combination of steps in VSTS you can automate the process 
 
 ## Environment Architecture
 
-[architecture](https://raw.githubusercontent.com/JimPaine/images/master/architecture.PNG)
+![architecture](https://raw.githubusercontent.com/JimPaine/images/master/architecture.PNG)
 
 ## Step 1 - Create a Service Principal
 
@@ -14,19 +14,19 @@ Go into the Azure portal, select Azure Active Directory and then App Registratio
 
 Create a new application and make note of the application id, sign-on URL can be http://localhost
 
-[newapp](https://raw.githubusercontent.com/JimPaine/images/master/newapp.PNG)
+![newapp](https://raw.githubusercontent.com/JimPaine/images/master/newapp.PNG)
 
 Open the application, click settings, keys and create a new password and make note of it
 
-[secret](https://raw.githubusercontent.com/JimPaine/images/master/secret.PNG)
+![secret](https://raw.githubusercontent.com/JimPaine/images/master/secret.PNG)
 
 Then select Required permissions and match the image below
 
-[permissions](https://raw.githubusercontent.com/JimPaine/images/master/permissions.PNG)
+![permissions](https://raw.githubusercontent.com/JimPaine/images/master/permissions.PNG)
 
 Still on the Required permissions pane click grant permissions (You will need to be an admin for this). These permissions are needed to create a Service Principal that will be used by AKS.
 
-[grant](https://raw.githubusercontent.com/JimPaine/images/master/grant.PNG)
+![grant](https://raw.githubusercontent.com/JimPaine/images/master/grant.PNG)
 
 Go back to the Overview pane of Active directory, select properties and make note of the Directory ID (Also know as the tenant ID).
 
@@ -40,15 +40,15 @@ Continue
 Start with an Empty Process rather than an existing template.
 Add a Copy files task and configure like below:
 
-[copytask](https://raw.githubusercontent.com/JimPaine/images/master/copytask.PNG)
+![copytask](https://raw.githubusercontent.com/JimPaine/images/master/copytask.PNG)
 
 Add a publish task and configure like so:
 
-[publish](https://raw.githubusercontent.com/JimPaine/images/master/publish.PNG)
+![publish](https://raw.githubusercontent.com/JimPaine/images/master/publish.PNG)
 
 Click on Process and change the Agent to Hosted Linux Preview.
 
-[agent](https://raw.githubusercontent.com/JimPaine/images/master/agent.PNG)
+![agent](https://raw.githubusercontent.com/JimPaine/images/master/agent.PNG)
 
 Under triggers - configure as desired.
 Rename and save.
@@ -63,7 +63,7 @@ This is where the fun happens! While VSTS is great and has loads of great integr
 - Start with an empty process, instead of an existing template
 - Under add artifact select select build, then the project and then the source build
 
-[artifact](https://raw.githubusercontent.com/JimPaine/images/master/artifact.PNG)
+![artifact](https://raw.githubusercontent.com/JimPaine/images/master/artifact.PNG)
 
 Now we need to do the meet of the work here, the preview linux agent doesn't have terraform installed, so we need to install it. Depending on the needs of the user or organisation you might want to look at using a dedicated agent.
 
@@ -77,7 +77,7 @@ sudo mv terraform /usr/local/bin/
 
 The working directory under advanced also needs to be set to location on the artifact
 
-[terraforminstall](https://raw.githubusercontent.com/JimPaine/images/master/terraforminstall.PNG)
+![terraforminstall](https://raw.githubusercontent.com/JimPaine/images/master/terraforminstall.PNG)
 
 Next we are going to intialize the environment and for this we need to create a bunch of variables to use within our script, so under variables create the following using the values you captured at the start of the process:
 
