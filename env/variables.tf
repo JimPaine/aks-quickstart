@@ -4,3 +4,4 @@ variable "client_id" {}
 variable "client_secret" {}
 variable "tenant_id" {}
 variable "public_key" {}
+variable "private_key" {}
