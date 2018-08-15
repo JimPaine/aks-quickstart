@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # generate ssh-key for cluster nodes
+
 ssh-keygen -t rsa -C "email@email.com" -N "somepassphrase" -f id_rsa
 public_key=$(<id_rsa.pub)
 # private key into keyvault?
@@ -39,18 +40,8 @@ export KUBECONFIG=$HOME/.kube/kube.config
 helm init
 helm init --upgrade
 
-acr_server=$(terraform output -json acr_server | jq '.value' | tr -d '"')
-acr_username=$(terraform output -json acr_username | jq '.value' | tr -d '"')
-acr_password=$(terraform output -json acr_password | jq '.value' | tr -d '"')
+sleep 2m # feels crap but once tiller is installed it takes time to come alive!
 
-sudo service docker start
-sudo docker pull nginx
-sudo docker login --username $acr_username --password $acr_password
-sudo docker tag nginx "$acr_username/$acr_server/examples/nginx"
-sudo docker push "$acr_username/$acr_server/examples/nginx"
-
-sed -i "s|{imagelocation}|$acr_server|g" ./example/values.yaml
-
-helm install ./example
+helm install stable/wordpress
 
 export KUBECONFIG=$KUBECONFIG_old

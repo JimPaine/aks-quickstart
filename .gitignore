@@ -8,4 +8,8 @@
 # .tfvars files
 *.tfvars
 
-**/scripts/get
+**/scripts/get*
+
+**/scripts/local.run.sh
+
+**/scripts/id_rsa*

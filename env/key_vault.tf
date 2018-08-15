@@ -22,3 +22,25 @@ resource "azurerm_key_vault" "demo" {
     ]
   }
 }
+resource "azurerm_key_vault_secret" "kubeconfig" {
+  name      = "kubeconfig"
+  value     = "${azurerm_kubernetes_cluster.demo.kube_config_raw}"
+  vault_uri = "${azurerm_key_vault.demo.vault_uri}"
+}
+
+resource "azurerm_key_vault_secret" "acrserver" {
+  name      = "acrserver"
+  value     = "${azurerm_container_registry.demo.login_server}"
+  vault_uri = "${azurerm_key_vault.demo.vault_uri}"
+}
+resource "azurerm_key_vault_secret" "acrusername" {
+  name      = "acrusername"
+  value     = "${azurerm_container_registry.demo.admin_username}"
+  vault_uri = "${azurerm_key_vault.demo.vault_uri}"
+}
+
+resource "azurerm_key_vault_secret" "acrpassword" {
+  name      = "acrpassword"
+  value     = "${azurerm_container_registry.demo.admin_password}"
+  vault_uri = "${azurerm_key_vault.demo.vault_uri}"
+}
