@@ -25,34 +25,34 @@ resource "azurerm_key_vault" "demo" {
 resource "azurerm_key_vault_secret" "kubeconfig" {
   name      = "kubeconfig"
   value     = "${azurerm_kubernetes_cluster.demo.kube_config_raw}"
-  vault_uri = "${azurerm_key_vault.demo.vault_uri}"
+  key_vault_id = "${azurerm_key_vault.demo.id}"
 }
 
 resource "azurerm_key_vault_secret" "acrserver" {
   name      = "acrserver"
   value     = "${azurerm_container_registry.demo.login_server}"
-  vault_uri = "${azurerm_key_vault.demo.vault_uri}"
+  key_vault_id = "${azurerm_key_vault.demo.id}"
 }
 resource "azurerm_key_vault_secret" "acrusername" {
   name      = "acrusername"
   value     = "${azurerm_container_registry.demo.admin_username}"
-  vault_uri = "${azurerm_key_vault.demo.vault_uri}"
+  key_vault_id = "${azurerm_key_vault.demo.id}"
 }
 
 resource "azurerm_key_vault_secret" "acrpassword" {
   name      = "acrpassword"
   value     = "${azurerm_container_registry.demo.admin_password}"
-  vault_uri = "${azurerm_key_vault.demo.vault_uri}"
+  key_vault_id = "${azurerm_key_vault.demo.id}"
 }
 
 resource "azurerm_key_vault_secret" "sshpublickey" {
   name      = "sshpublickey"
   value     = "${var.public_key}"
-  vault_uri = "${azurerm_key_vault.demo.vault_uri}"
+  key_vault_id = "${azurerm_key_vault.demo.id}"
 }
 
 resource "azurerm_key_vault_secret" "sshprivatekey" {
   name      = "sshprivatekey"
   value     = "${var.private_key}"
-  vault_uri = "${azurerm_key_vault.demo.vault_uri}"
+  key_vault_id = "${azurerm_key_vault.demo.id}"
 }

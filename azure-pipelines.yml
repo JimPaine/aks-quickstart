@@ -1,0 +1,43 @@
+queue:
+  name: Hosted Ubuntu 1604
+
+
+variables:
+  tfstate_key: 'jimpaine.aks-quickstart.master.tfstate'
+  resource_name: 'aks'
+  
+steps:
+
+- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+  displayName: 'Replace tokens in **/*.tfvars'
+
+  inputs:
+    rootDirectory: ./env
+    targetFiles: '**/*.tfvars'
+
+- script: |
+   ssh-keygen -t rsa -C "email@email.com" -N "${ssh_key_passphrase}" -f id_rsa
+   public_key=$(<id_rsa.pub)
+   private_key=$(<id_rsa)
+
+  workingDirectory: ./env
+  displayName: 'Generate ssh key'
+
+- script: |
+   terraform init \
+       -backend-config="resource_group_name=$(tfstate_resource_group)" \
+       -backend-config="storage_account_name=$(tfstate_storage_account)" \
+       -backend-config="container_name=$(tfstate_container)" \
+       -backend-config="key=$(tfstate_key)" \
+       -backend-config="access_key=$(tfstate_access_key)"
+
+  workingDirectory: ./env
+  displayName: 'Terraform init'
+
+- script: |
+   terraform apply -auto-approve \
+       -var-file="terraform.tfvars"
+
+  workingDirectory: ./env
+  displayName: 'Terraform apply'
+
