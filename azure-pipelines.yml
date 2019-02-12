@@ -3,8 +3,12 @@ queue:
 
 
 variables:
-  tfstate_key: 'jimpaine.aks-quickstart.master.tfstate'
-  resource_name: 'aks'
+  - group: 'Terraform Service Principal'
+  - group: 'Terraform State'
+  - name: tfstate_key
+    value: 'jimpaine.aks-quickstart.master.tfstate'
+  - name: resource_name
+    value: 'aks'
   
 steps:
 
