@@ -5,9 +5,6 @@
 *.tfstate
 *.tfstate.*
 
-# .tfvars files
-*.tfvars
-
 **/scripts/get*
 
 **/scripts/local.run.sh
