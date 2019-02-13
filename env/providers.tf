@@ -6,6 +6,10 @@ provider "azurerm" {
   tenant_id       = "${var.tenant_id}"
 }
 
+provider "azuread" {
+  version = "~>0.1.0"
+}
+
 provider "random" {
   version = "~> 1.3"
 }

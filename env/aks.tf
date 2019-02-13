@@ -45,7 +45,7 @@ resource "azurerm_kubernetes_cluster" "demo" {
   }
 
   service_principal {
-    client_id     = "${azurerm_azuread_application.demo.application_id}"
-    client_secret = "${azurerm_azuread_service_principal_password.demo.value}"
+    client_id     = "${azuread_application.demo.application_id}"
+    client_secret = "${azuread_service_principal_password.demo.value}"
   }
 }
