@@ -32,7 +32,7 @@ resource "azurerm_kubernetes_cluster" "demo" {
     admin_username = "clusteradmin"
 
     ssh_key {
-      key_data = "${file(id_rsa.pub)}"
+      key_data = "${file("id_rsa.pub")}"
     }
   }
 
