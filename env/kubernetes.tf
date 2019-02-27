@@ -1,6 +1,12 @@
-resource "kubernetes_namespace" "demo" {
+resource "kubernetes_namespace" "dev" {
   metadata {
     name = "dev"
+  }
+}
+
+resource "kubernetes_namespace" "sre" {
+  metadata {
+    name = "sre"
   }
 }
 
@@ -27,4 +33,23 @@ resource "kubernetes_secret" "demo" {
   }
 
   type = "kubernetes.io/dockercfg"
+}
+
+#kubectl create clusterrolebinding kubernetes-dashboard -n kube-system --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+
+resource "kubernetes_cluster_role_binding" "admindashboard" {
+    metadata {
+        name = "kubernetes-dashboard"
+    }
+    role_ref {
+        api_group = "rbac.authorization.k8s.io"
+        kind = "ClusterRole"
+        name = "cluster-admin"
+    }
+    subject {
+        kind = "ServiceAccount"
+        name = "kubernetes-dashboard"
+        namespace = "kube-system"
+        api_group = ""
+    }
 }

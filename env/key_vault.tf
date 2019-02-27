@@ -47,12 +47,12 @@ resource "azurerm_key_vault_secret" "acrpassword" {
 
 resource "azurerm_key_vault_secret" "sshpublickey" {
   name      = "sshpublickey"
-  value     = "${file("id_rsa.pub")}"
+  value     = "${tls_private_key.demo.public_key_openssh}"
   key_vault_id = "${azurerm_key_vault.demo.id}"
 }
 
 resource "azurerm_key_vault_secret" "sshprivatekey" {
   name      = "sshprivatekey"
-  value     = "${file("id_rsa")}"
+  value     = "${tls_private_key.demo.private_key_pem}"
   key_vault_id = "${azurerm_key_vault.demo.id}"
 }

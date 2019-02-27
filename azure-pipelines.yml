@@ -1,9 +1,7 @@
 queue:
   name: Hosted Ubuntu 1604
 
-
 variables:
-  - group: 'Terraform Service Principal'
   - group: 'Terraform State'
   - name: tfstate_key
     value: 'jimpaine.aks-quickstart.master.tfstate'
@@ -18,14 +16,6 @@ steps:
   inputs:
     rootDirectory: ./env
     targetFiles: '**/*.tfvars'
-
-- script: |
-   ssh-keygen -t rsa -C "email@email.com" -N "${ssh_key_passphrase}" -f id_rsa
-   public_key=$(<id_rsa.pub)
-   private_key=$(<id_rsa)
-
-  workingDirectory: ./env
-  displayName: 'Generate ssh key'
 
 - script: |
    terraform init \
