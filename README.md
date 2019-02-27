@@ -2,6 +2,8 @@
 
 Currently under a massive re-write
 
+[![Build Status](https://dev.azure.com/jimpaine-msft/github%20pipelines/_apis/build/status/JimPaine.emotion-checker?branchName=master)](https://dev.azure.com/jimpaine-msft/github%20pipelines/_build/latest?definitionId=8&branchName=master)
+
 Currently includes
 - RBAC Cluster
 - Includes Advanced Networking, allowing external cluster IPs to be private and on a local vnet
