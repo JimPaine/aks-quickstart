@@ -13,12 +13,12 @@ steps:
 - task: qetza.replacetokens.replacetokens-task.replacetokens@3
   displayName: 'Replace tokens in **/*.tfvars'
 
-- task: HelmInstaller@0
-  displayName: 'Install Helm 2.9.1'
-
   inputs:
     rootDirectory: ./env
     targetFiles: '**/*.tfvars'
+
+- task: HelmInstaller@0
+  displayName: 'Install Helm 2.9.1'
 
 - script: |
    terraform init \
