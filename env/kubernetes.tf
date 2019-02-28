@@ -4,12 +4,6 @@ resource "kubernetes_namespace" "dev" {
   }
 }
 
-resource "kubernetes_namespace" "sre" {
-  metadata {
-    name = "sre"
-  }
-}
-
 locals {
   dockercfg = {
     "${azurerm_container_registry.demo.login_server}" = {
