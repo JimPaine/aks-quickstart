@@ -33,3 +33,37 @@ resource "kubernetes_cluster_role_binding" "tiller" {
         api_group = ""
     }
 }
+
+resource "kubernetes_service_account" "clustertiller" {
+  metadata {
+    name = "clustertiller"
+  }
+}
+
+resource "kubernetes_cluster_role" "clustertiller" {
+    metadata {
+        name = "clustertiller-manager"
+    }
+
+    rule {
+        api_groups = ["", "batch", "extensions", "apps"]
+        resources  = ["*"]
+        verbs      = ["*"]
+    }
+}
+
+resource "kubernetes_cluster_role_binding" "clustertiller" {
+    metadata {
+        name = "clustertiller-binding"
+    }
+    role_ref {
+        api_group = "rbac.authorization.k8s.io"
+        kind = "ClusterRole"
+        name = "clustertiller-manager"
+    }
+    subject {
+        kind = "ServiceAccount"
+        name = "clustertiller"
+        api_group = ""
+    }
+}
