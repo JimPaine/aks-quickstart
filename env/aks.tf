@@ -16,6 +16,8 @@ resource "azurerm_kubernetes_cluster" "demo" {
     }
   }
 
+  kubernetes_version = "1.12"
+
   agent_pool_profile {
     name            = "default"
     count           = 3
