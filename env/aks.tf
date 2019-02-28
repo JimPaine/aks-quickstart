@@ -16,7 +16,7 @@ resource "azurerm_kubernetes_cluster" "demo" {
     }
   }
 
-  kubernetes_version = "1.12"
+  kubernetes_version = "1.12.4"
 
   agent_pool_profile {
     name            = "default"
