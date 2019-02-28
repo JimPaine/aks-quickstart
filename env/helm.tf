@@ -8,8 +8,12 @@ resource "helm_release" "grafana" {
     chart     = "stable/grafana"
 }
 
-locals {
-  annotations = {
-    "service.beta.kubernetes.io/azure-load-balancer-internal" = "true"
-  }
+resource "helm_release" "corednsetcd" {
+    name      = "etcdoperator"
+    chart     = "stable/etcd-operator"
+
+    set {
+        name = "cluster.enabled"
+        value = "true"
+    }
 }
