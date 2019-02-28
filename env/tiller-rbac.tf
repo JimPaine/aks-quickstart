@@ -24,7 +24,7 @@ resource "kubernetes_cluster_role_binding" "tiller" {
     role_ref {
         api_group = "rbac.authorization.k8s.io"
         kind = "ClusterRole"
-        name = "cluster-admin"
+        name = "tiller-manager"
     }
     subject {
         kind = "ServiceAccount"
@@ -47,7 +47,7 @@ resource "kubernetes_cluster_role_binding" "clustertiller" {
     role_ref {
         api_group = "rbac.authorization.k8s.io"
         kind = "ClusterRole"
-        name = "tiller-manager"
+        name = "cluster-admin"
     }
     subject {
         kind = "ServiceAccount"
