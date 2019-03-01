@@ -59,3 +59,31 @@ resource "azurerm_firewall" "demo" {
     public_ip_address_id = "${azurerm_public_ip.demo.id}"
   }
 }
+
+resource "azurerm_firewall_network_rule_collection" "demo" {
+  name                = "inboundk8s"
+  azure_firewall_name = "${azurerm_firewall.demo.name}"
+  resource_group_name = "${azurerm_resource_group.demo.name}"
+  priority            = 100
+  action              = "Allow"
+
+  rule {
+    name = "inboundk8s"
+
+    source_addresses = [
+      "*",
+    ]
+
+    destination_ports = [
+      "80",
+    ]
+
+    destination_addresses = [
+      "10.1.0.254",
+    ]
+
+    protocols = [
+      "TCP",
+    ]
+  }
+}
