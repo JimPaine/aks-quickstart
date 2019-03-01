@@ -9,8 +9,10 @@ resource "helm_release" "grafana" {
 }
 
 resource "helm_release" "nginx" {
-    name      = "nginx"
+    name      = "nginxdev"
     chart     = "stable/nginx-ingress"
+
+    namespace = "dev"
 
     values = [<<VALUES
         controller:
