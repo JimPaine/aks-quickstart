@@ -8,8 +8,8 @@ resource "helm_release" "grafana" {
     chart     = "stable/grafana"
 }
 
-resource "helm_release" "Traefik" {
-    name      = "Traefik"
+resource "helm_release" "traefik" {
+    name      = "traefik"
     chart     = "stable/traefik"
 
     namespace = "dev"
