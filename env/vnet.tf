@@ -32,3 +32,23 @@ resource "azurerm_subnet_route_table_association" "demo" {
   subnet_id      = "${azurerm_subnet.demo.id}"
   route_table_id = "${azurerm_route_table.demo.id}"
 }
+
+resource "azurerm_public_ip" "demo" {
+  name                = "pip"
+  location            = "${azurerm_resource_group.demo.location}"
+  resource_group_name = "${azurerm_resource_group.demo.name}"
+  allocation_method   = "Static"
+  sku                 = "Standard"
+}
+
+resource "azurerm_firewall" "demo" {
+  name                = "firewall"
+  location            = "${azurerm_resource_group.demo.location}"
+  resource_group_name = "${azurerm_resource_group.demo.name}"
+
+  ip_configuration {
+    name                 = "configuration"
+    subnet_id            = "${azurerm_subnet.demo.id}"
+    public_ip_address_id = "${azurerm_public_ip.demo.id}"
+  }
+}
