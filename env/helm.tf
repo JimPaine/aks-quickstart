@@ -8,19 +8,17 @@ resource "helm_release" "grafana" {
     chart     = "stable/grafana"
 }
 
-resource "helm_release" "nginx" {
-    name      = "nginxdev"
-    chart     = "stable/nginx-ingress"
+resource "helm_release" "Traefik" {
+    name      = "Traefik"
+    chart     = "stable/traefik"
 
     namespace = "dev"
 
     values = [<<VALUES
-        controller:
-          service:
-            type: LoadBalancer
-            loadBalancerIP: 10.1.0.254
-            annotations: 
-              service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+        loadBalancerIP: 10.1.0.254
+        service:
+          annotations: 
+            service.beta.kubernetes.io/azure-load-balancer-internal: "true"
     VALUES
     ]
 }
