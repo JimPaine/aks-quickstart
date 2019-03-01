@@ -10,7 +10,7 @@ resource "helm_release" "grafana" {
 
 resource "helm_release" "nginx" {
     name      = "nginx"
-    chart     = "stable/nginx"
+    chart     = "stable/nginx-ingress"
 
     values = [<<VALUES
         controller:
