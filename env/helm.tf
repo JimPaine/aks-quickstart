@@ -18,7 +18,7 @@ resource "helm_release" "nginx" {
         controller:
           service:
             type: LoadBalancer
-            loadBalancerIP: 10.240.0.25
+            loadBalancerIP: 10.1.1.254
             annotations: 
               service.beta.kubernetes.io/azure-load-balancer-internal: "true"
     VALUES
