@@ -32,6 +32,13 @@ resource "azurerm_firewall" "demo" {
   }
 }
 
+resource "azurerm_virtual_network_peering" "hubtoaks" {
+  name                      = "hubtoaks"
+  resource_group_name       = "${azurerm_resource_group.demo.name}"
+  virtual_network_name      = "${azurerm_virtual_network.hub.name}"
+  remote_virtual_network_id = "${azurerm_virtual_network.aks.id}"
+}
+
 resource "azurerm_firewall_network_rule_collection" "demo" {
   name                = "inboundk8s"
   azure_firewall_name = "${azurerm_firewall.demo.name}"
