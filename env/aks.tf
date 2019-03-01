@@ -40,11 +40,11 @@ resource "azurerm_kubernetes_cluster" "demo" {
   role_based_access_control {
     enabled = true
   }
-  
+
   addon_profile {
     oms_agent {
       enabled = true
-      log_analytics_workspace_id = "${azurerm_log_analytics_workspace.demo.workspace_id}"
+      log_analytics_workspace_id = "${azurerm_log_analytics_workspace.demo.id}"
     }
   }  
 }
