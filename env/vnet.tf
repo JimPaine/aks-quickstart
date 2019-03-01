@@ -12,11 +12,6 @@ resource "azurerm_subnet" "firewall" {
   virtual_network_name = "${azurerm_virtual_network.demo.name}"
 }
 
-resource "azurerm_subnet_route_table_association" "demo" {
-  subnet_id      = "${azurerm_subnet.firewall.id}"
-  route_table_id = "${azurerm_route_table.demo.id}"
-}
-
 resource "azurerm_public_ip" "demo" {
   name                = "pip"
   location            = "${azurerm_resource_group.demo.location}"
