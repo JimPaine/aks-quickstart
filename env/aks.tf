@@ -25,7 +25,7 @@ resource "azurerm_kubernetes_cluster" "demo" {
     os_type         = "Linux"
     os_disk_size_gb = 30
 
-    vnet_subnet_id = "${azurerm_subnet.demo.id}"
+    vnet_subnet_id = "${azurerm_subnet.firewall.id}"
   }
 
   service_principal {
