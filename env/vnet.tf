@@ -31,7 +31,7 @@ resource "azurerm_subnet" "demo" {
 resource "azurerm_subnet" "firewall" {
   name                 = "AzureFirewallSubnet "
   resource_group_name  = "${azurerm_resource_group.demo.name}"
-  address_prefix       = "10.2.0.0/24"
+  address_prefix       = "10.1.1.0/24"
   virtual_network_name = "${azurerm_virtual_network.demo.name}"
 }
 
@@ -55,7 +55,7 @@ resource "azurerm_firewall" "demo" {
 
   ip_configuration {
     name                 = "configuration"
-    subnet_id            = "${azurerm_subnet.demo.id}"
+    subnet_id            = "${azurerm_subnet.firewall.id}"
     public_ip_address_id = "${azurerm_public_ip.demo.id}"
   }
 }
