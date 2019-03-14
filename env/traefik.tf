@@ -38,7 +38,7 @@ resource "kubernetes_cluster_role" "traefik" {
 
 resource "kubernetes_cluster_role_binding" "traefik" {
     metadata {
-        name = "clustertiller-binding"
+        name = "traefik-controller-binding"
     }
     role_ref {
         api_group = "rbac.authorization.k8s.io"
