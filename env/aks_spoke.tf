@@ -21,7 +21,7 @@ resource "azurerm_route_table" "demo" {
   
   route {
     name           = "route1"
-    address_prefix = "10.2.0.0/16"
+    address_prefix = "10.2.0.0/24"
     next_hop_type  = "VirtualAppliance"
     next_hop_in_ip_address = "${azurerm_firewall.demo.ip_configuration.0.private_ip_address}"
   }
