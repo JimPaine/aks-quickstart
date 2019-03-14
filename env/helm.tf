@@ -19,9 +19,12 @@ resource "helm_release" "traefik" {
         value = "10.1.0.254"
     }
 
-    values = <<VALUES
-annotations:
-      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    values = [<<VALUES
+        dashboard:
+          ingress:
+            annotations:
+              service.beta.kubernetes.io/azure-load-balancer-internal: "true"
     VALUES
+    ]
 }
 
