@@ -38,6 +38,8 @@ resource "azurerm_virtual_network_peering" "hubtoaks" {
   resource_group_name       = "${azurerm_resource_group.demo.name}"
   virtual_network_name      = "${azurerm_virtual_network.hub.name}"
   remote_virtual_network_id = "${azurerm_virtual_network.aks.id}"
+
+  allow_gateway_transit = true
 }
 
 resource "azurerm_firewall_network_rule_collection" "demo" {
