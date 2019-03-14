@@ -18,11 +18,12 @@ resource "azurerm_route_table" "demo" {
   location                      = "${azurerm_resource_group.demo.location}"
   resource_group_name           = "${azurerm_resource_group.demo.name}"
   disable_bgp_route_propagation = false
-
+  
   route {
     name           = "route1"
     address_prefix = "10.2.0.0/16"
-    next_hop_type  = "vnetlocal"
+    next_hop_type  = "VirtualAppliance"
+    next_hop_in_ip_address = "${azurerm_firewall.demo.private_ip_address}"
   }
 }
 

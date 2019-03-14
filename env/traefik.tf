@@ -18,6 +18,10 @@ resource "helm_release" "traefik" {
         dashboard:
           enabled: true
           domain: ${azurerm_public_ip.demo.fqdn}
+          serviceType: LoadBalancer
+          service:
+          annotations:
+            service.beta.kubernetes.io/azure-load-balancer-internal: "true"
     VALUES
     ]
 }
