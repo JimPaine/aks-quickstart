@@ -18,6 +18,7 @@ resource "azurerm_public_ip" "demo" {
   resource_group_name = "${azurerm_resource_group.demo.name}"
   allocation_method   = "Static"
   sku                 = "Standard"
+  domain_name_label = "${var.resource_name}${random_id.demo.dec}"
 }
 
 resource "azurerm_firewall" "demo" {
