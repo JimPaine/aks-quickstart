@@ -13,4 +13,15 @@ resource "helm_release" "traefik" {
     chart     = "stable/traefik"
 
     namespace = "dev"
+
+    set {
+        name = "loadBalancerIP"
+        value = "10.1.0.254"
+    }
+
+    values = <<VALUES
+annotations:
+      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    VALUES
 }
+
