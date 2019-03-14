@@ -2,6 +2,7 @@ queue:
   name: Hosted Ubuntu 1604
 
 variables:
+  - group: 'Terraform Service Prinicpal (AAD Sandbox)'
   - group: 'Terraform State'
   - name: tfstate_key
     value: 'jimpaine.aks-quickstart.master.tfstate'
