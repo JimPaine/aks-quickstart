@@ -31,10 +31,3 @@ resource "azurerm_subnet_route_table_association" "demo" {
   subnet_id      = "${azurerm_subnet.aks.id}"
   route_table_id = "${azurerm_route_table.demo.id}"
 }
-resource "azurerm_virtual_network_peering" "akstohub" {
-  name                      = "akstohub"
-  resource_group_name       = "${azurerm_resource_group.demo.name}"
-  virtual_network_name      = "${azurerm_virtual_network.aks.name}"
-  remote_virtual_network_id = "${azurerm_virtual_network.hub.id}"
-  use_remote_gateways = true
-}
