@@ -15,9 +15,6 @@ resource "helm_release" "traefik" {
             service.beta.kubernetes.io/azure-load-balancer-internal: "true"
         rbac:
           enabled: true
-        dashboard:
-          enabled: true
-          domain: ${azurerm_public_ip.demo.fqdn}
     VALUES
     ]
 }
