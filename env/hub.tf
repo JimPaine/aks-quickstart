@@ -2,7 +2,7 @@ resource "azurerm_virtual_network" "hub" {
   name                = "${var.resource_name}-hub-network"
   location            = "${azurerm_resource_group.demo.location}"
   resource_group_name = "${azurerm_resource_group.demo.name}"
-  address_space       = ["10.2.0.0/16"]
+  address_space       = ["10.2.0.0/24"]
 }
 
 resource "azurerm_subnet" "firewall" {
