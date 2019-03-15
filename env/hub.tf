@@ -1,4 +1,4 @@
-resource "azurerm_virtual_network" "demo" {
+resource "azurerm_virtual_network" "hub" {
   name                = "${var.resource_name}-network"
   location            = "${azurerm_resource_group.demo.location}"
   resource_group_name = "${azurerm_resource_group.demo.name}"
@@ -9,7 +9,7 @@ resource "azurerm_subnet" "firewall" {
   name                 = "AzureFirewallSubnet"
   resource_group_name  = "${azurerm_resource_group.demo.name}"
   address_prefix       = "10.1.1.0/24"
-  virtual_network_name = "${azurerm_virtual_network.demo.name}"
+  virtual_network_name = "${azurerm_virtual_network.hub.name}"
 }
 
 resource "azurerm_public_ip" "demo" {

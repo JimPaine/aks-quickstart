@@ -6,7 +6,7 @@ resource "helm_release" "traefik" {
 
     set {
         name = "loadBalancerIP"
-        value = "10.1.2.254"
+        value = "10.2.2.254"
     }
 
     values = [<<VALUES
