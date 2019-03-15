@@ -60,3 +60,32 @@ resource "azurerm_firewall_network_rule_collection" "demo" {
     ]
   }
 }
+
+resource "azurerm_firewall_network_rule_collection" "outbound" {
+  name                = "outboundaks"
+  azure_firewall_name = "${azurerm_firewall.demo.name}"
+  resource_group_name = "${azurerm_resource_group.demo.name}"
+  priority            = 100
+  action              = "Allow"
+
+  rule {
+    name = "outboundaks"
+
+    source_addresses = [
+      "*",
+    ]
+
+    azurerm_firewall_application_rule_collection = [
+      "*.azmk8s.io",
+      "*auth.docker.io",
+      "*cloudflare.docker.io",
+      "*cloudflare.docker.com",
+      "*registry-1.docker.io" 
+    ]
+
+    protocol = {
+      port = 443
+      type = "https"
+    }
+  }
+}
