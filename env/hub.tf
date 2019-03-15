@@ -80,7 +80,10 @@ resource "azurerm_firewall_application_rule_collection" "outbound" {
       "*auth.docker.io",
       "*cloudflare.docker.io",
       "*cloudflare.docker.com",
-      "*registry-1.docker.io" 
+      "*registry-1.docker.io",
+      "*.opinsights.azure.com",
+      "*azurecr.io",
+      "*.ubuntu.com"
     ]
 
     protocol = {
