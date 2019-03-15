@@ -61,7 +61,7 @@ resource "azurerm_firewall_network_rule_collection" "demo" {
   }
 }
 
-resource "azurerm_firewall_network_rule_collection" "outbound" {
+resource "azurerm_firewall_application_rule_collection" "outbound" {
   name                = "outboundaks"
   azure_firewall_name = "${azurerm_firewall.demo.name}"
   resource_group_name = "${azurerm_resource_group.demo.name}"
