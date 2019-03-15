@@ -75,7 +75,7 @@ resource "azurerm_firewall_application_rule_collection" "outbound" {
       "*",
     ]
 
-    azurerm_firewall_application_rule_collection = [
+    target_fqdns = [
       "*.azmk8s.io",
       "*auth.docker.io",
       "*cloudflare.docker.io",
