@@ -85,7 +85,7 @@ resource "azurerm_firewall_application_rule_collection" "outbound" {
 
     protocol = {
       port = 443
-      type = "https"
+      type = "Https"
     }
   }
 }
