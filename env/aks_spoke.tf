@@ -25,6 +25,12 @@ resource "azurerm_route_table" "demo" {
     next_hop_type  = "VirtualAppliance"
     next_hop_in_ip_address = "${azurerm_firewall.demo.ip_configuration.0.private_ip_address}"
   }
+
+  route {
+    name           = "net"
+    address_prefix = "0.0.0.0/0"
+    next_hop_type  = "Internet"    
+  }
 }
 
 resource "azurerm_subnet_route_table_association" "demo" {
