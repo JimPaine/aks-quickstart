@@ -48,11 +48,11 @@ resource "azurerm_firewall_network_rule_collection" "demo" {
     ]
 
     destination_ports = [
-      "80",
+      "80", "443"
     ]
 
     destination_addresses = [
-      "10.1.2.254",
+      "*",
     ]
 
     protocols = [
