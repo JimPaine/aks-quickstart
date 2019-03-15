@@ -20,8 +20,8 @@ resource "azurerm_route_table" "demo" {
   disable_bgp_route_propagation = false
   
   route {
-    name           = "route1"
-    address_prefix = "0.0.0.0/0"
+    name           = "hub"
+    address_prefix = "10.1.1.0/24"
     next_hop_type  = "VirtualAppliance"
     next_hop_in_ip_address = "${azurerm_firewall.demo.ip_configuration.0.private_ip_address}"
   }
