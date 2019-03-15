@@ -48,7 +48,7 @@ resource "azurerm_firewall_network_rule_collection" "demo" {
     ]
 
     destination_ports = [
-      "80", "443"
+      "80", "443", "22"
     ]
 
     destination_addresses = [
