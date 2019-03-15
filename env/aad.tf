@@ -23,7 +23,7 @@ resource "azuread_service_principal_password" "demo" {
 }
 
 resource "azurerm_role_assignment" "demo" {
-  scope                = "${azurerm_virtual_network.demo.id}"
+  scope                = "${azurerm_virtual_network.aks.id}"
   role_definition_name = "Network Contributor"
   principal_id         = "${azuread_service_principal.demo.id}"
 }
