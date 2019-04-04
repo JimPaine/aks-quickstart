@@ -21,3 +21,9 @@ resource "azuread_service_principal_password" "aks" {
   value                = "${random_string.aks.result}"
   end_date             = "2020-01-01T01:02:03Z"
 }
+
+resource "azurerm_role_assignment" "aks" {
+  scope              = "${data.azurerm_client_config.aks.subscription_id}"
+  role_definition_name = "NetworkContributer"
+  principal_id       = "${azuread_application.aks.id}"
+}
