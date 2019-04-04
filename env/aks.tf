@@ -1,18 +1,18 @@
-resource "tls_private_key" "demo" {
+resource "tls_private_key" "aks" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
-resource "azurerm_kubernetes_cluster" "demo" {
-  name                = "${var.resource_name}${random_id.demo.dec}"
-  location            = "${azurerm_resource_group.demo.location}"
-  resource_group_name = "${azurerm_resource_group.demo.name}"
-  dns_prefix          = "${var.resource_name}${random_id.demo.dec}"
+resource "azurerm_kubernetes_cluster" "aks" {
+  name                = "${var.resource_name}${random_id.aks.dec}"
+  location            = "${azurerm_resource_group.aks.location}"
+  resource_group_name = "${azurerm_resource_group.aks.name}"
+  dns_prefix          = "${var.resource_name}${random_id.aks.dec}"
 
   linux_profile {
     admin_username = "clusteradmin"
 
     ssh_key {
-      key_data = "${tls_private_key.demo.public_key_openssh}"
+      key_data = "${tls_private_key.aks.public_key_openssh}"
     }
   }
 
@@ -29,8 +29,8 @@ resource "azurerm_kubernetes_cluster" "demo" {
   }
 
   service_principal {
-    client_id     = "${azuread_application.demo.application_id}"
-    client_secret = "${azuread_service_principal_password.demo.value}"
+    client_id     = "9b6a83fc-e60e-4301-becc-5aa65fd5ae8e"
+    client_secret = "7ymcPp5vbGKFrqDCxPiLlnI6X4rzQKop8LKP7dJ9nPA="
   }
 
   network_profile {
@@ -47,7 +47,7 @@ resource "azurerm_kubernetes_cluster" "demo" {
   addon_profile {
     oms_agent {
       enabled = true
-      log_analytics_workspace_id = "${azurerm_log_analytics_workspace.demo.id}"
+      log_analytics_workspace_id = "${azurerm_log_analytics_workspace.aks.id}"
     }
   }  
 }

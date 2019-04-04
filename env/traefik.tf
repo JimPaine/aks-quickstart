@@ -17,7 +17,7 @@ resource "helm_release" "traefik" {
           enabled: true
         dashboard:
           enabled: true
-          domain: ${azurerm_public_ip.demo.fqdn}
+          domain: ${dnsimple_record.aks.hostname}
           serviceType: LoadBalancer
           service:
           annotations:

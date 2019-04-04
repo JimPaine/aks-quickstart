@@ -7,10 +7,3 @@
 
 *.tfvars
 !terraform.tfvars
-
-**/scripts/get*
-
-**/scripts/local.run.sh
-
-**/scripts/id_rsa*
-
