@@ -6,19 +6,18 @@ Currently under a massive re-write
 
 Currently includes
 - RBAC Cluster
-- Includes Advanced Networking, allowing external cluster IPs to be private and on a local vnet
-- SA for Helm and Tiller with custom roles and bindings
+- Includes Advanced Networking using CNI, allowing external cluster IPs to be private and on a local vnet
+- Service Account for Helm and Tiller with custom roles and bindings
+    - With namespace specific instances
 - Generation of SSH Keys
-- Dashboard rol binding for demo ressons
+- No dashboard access
+- Traefik for Ingress
+- Application Gateway v2 with WAF on custom domain and SSL https://aks.jim.cloud
 
-To Add:
-- Istio
-- Monitoring
+TODO
 - Demo apps
 - Azure AD SPs for Container Registry RBAC. Reader for cluster and Contributer for DevOps Pipeline
 - Dev Spaces
 - Pod Identity
-
-## Environment Architecture
-
-![architecture](https://raw.githubusercontent.com/JimPaine/images/master/architecture.PNG)
+- Pictures
+- Documentation
