@@ -1,3 +1,5 @@
+data "azurerm_client_config" "aks" {}
+
 resource "azuread_application" "aks" {
   name                       = "${var.resource_name}${random_id.aks.dec}"
   homepage                   = "https://homepage${random_id.aks.dec}"
