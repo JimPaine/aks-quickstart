@@ -1,5 +1,3 @@
-data "azurerm_client_config" "aks" {}
-
 resource "azuread_application" "aks" {
   name                       = "${var.resource_name}${random_id.aks.dec}"
   homepage                   = "https://homepage${random_id.aks.dec}"
@@ -25,7 +23,7 @@ resource "azuread_service_principal_password" "aks" {
 }
 
 resource "azurerm_role_assignment" "aks" {
-  scope              = "${data.azurerm_client_config.aks.subscription_id}"
-  role_definition_name = "NetworkContributer"
+  scope              = "${azurerm_resource_group.aks.id}"
+  role_definition_name = "Network Contributor"
   principal_id       = "${azuread_application.aks.id}"
 }
