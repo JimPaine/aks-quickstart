@@ -25,5 +25,5 @@ resource "azuread_service_principal_password" "aks" {
 resource "azurerm_role_assignment" "aks" {
   scope              = "${azurerm_resource_group.aks.id}"
   role_definition_name = "Network Contributor"
-  principal_id       = "${azuread_application.aks.id}"
+  principal_id       = "${azuread_service_principal.aks.id}"
 }

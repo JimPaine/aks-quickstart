@@ -1,4 +1,6 @@
 resource "helm_release" "traefik" {
+    depends_on = ["azurerm_role_assignment.aks"]
+
     name      = "traefik"
     chart     = "stable/traefik"
 
