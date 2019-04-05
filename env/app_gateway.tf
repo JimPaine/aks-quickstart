@@ -1,3 +1,5 @@
+# The application gateway needs its own subnet as the only things that can be in 
+# the same subnet as an application gateway our other application gateways.
 resource "azurerm_subnet" "gateway" {
   name                 = "gateway"
   resource_group_name  = "${azurerm_resource_group.aks.name}"
@@ -11,7 +13,7 @@ resource "azurerm_public_ip" "gateway" {
   resource_group_name = "${azurerm_resource_group.aks.name}"
   allocation_method   = "Static"
   sku                 = "Standard"
-  domain_name_label = "aks${random_id.aks.dec}"
+  domain_name_label = "aks${random_id.aks.dec}" # Create a domain label which we can use for our CNAME for our custom domain
 }
 
 resource "azurerm_application_gateway" "aks" {
@@ -46,6 +48,8 @@ resource "azurerm_application_gateway" "aks" {
     password = "${random_string.certpass.result}"
   }
 
+  # Set the Kubernetes ingress entry point at the backend pool
+  # this is set in traefik.tf
   backend_address_pool {
     name = "k8s"
     ip_addresses = ["10.2.1.254"]
@@ -60,6 +64,9 @@ resource "azurerm_application_gateway" "aks" {
     probe_name = "dashboardprobe"
   }
 
+  # This is the route that traefik publishs for helth
+  # so this would need to be changed if you switched to
+  # Nginx for ingress
   probe {
       interval = 15
       name = "dashboardprobe"
@@ -67,7 +74,7 @@ resource "azurerm_application_gateway" "aks" {
       path = "/health"
       timeout = 1
       unhealthy_threshold = 3
-      host = "${dnsimple_record.aks.hostname}"
+      host = "${dnsimple_record.aks.hostname}" # The host name will be the fqdn of our custom domain, in my case aks.jim.cloud
   }
 
   http_listener {

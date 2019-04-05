@@ -1,13 +1,20 @@
+
+# Generate the SSH key that will be used for the Linux account on the worker nodes
 resource "tls_private_key" "aks" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
+
+
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = "${var.resource_name}${random_id.aks.dec}"
   location            = "${azurerm_resource_group.aks.location}"
   resource_group_name = "${azurerm_resource_group.aks.name}"
   dns_prefix          = "${var.resource_name}${random_id.aks.dec}"
 
+  # set the Linux profile details using the ssh key we just generated. 
+  # Not that it should be used to access the VM directly, hence why I don't 
+  # store it in Azure Key Vault
   linux_profile {
     admin_username = "clusteradmin"
 
@@ -25,6 +32,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     os_type         = "Linux"
     os_disk_size_gb = 30
 
+    # Attach the AKS cluster to the subnet within the VNet we have created
     vnet_subnet_id = "${azurerm_subnet.aks.id}"
   }
 
@@ -40,11 +48,15 @@ resource "azurerm_kubernetes_cluster" "aks" {
     docker_bridge_cidr = "172.17.0.1/16"
   }
 
+  # Enabled RBAC
   role_based_access_control {
     enabled = true
   }
 
   addon_profile {
+
+    # Add the OMS Agent which will generate and collect all the logs to put into
+    # Azure Monitor for Container Insights
     oms_agent {
       enabled = true
       log_analytics_workspace_id = "${azurerm_log_analytics_workspace.aks.id}"

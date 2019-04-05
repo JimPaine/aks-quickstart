@@ -1,3 +1,5 @@
+# Create a Service Account to run tiller as
+# This is specific to our namespace as well
 resource "kubernetes_service_account" "tiller" {
   metadata {
     name = "tiller"
@@ -5,6 +7,7 @@ resource "kubernetes_service_account" "tiller" {
   }
 }
 
+# Generate a cluster role with specific permissions
 resource "kubernetes_cluster_role" "tiller" {
     metadata {
         name = "tiller-manager"
@@ -17,6 +20,7 @@ resource "kubernetes_cluster_role" "tiller" {
     }
 }
 
+# Assign our new cluster role to the Tiller Service Account
 resource "kubernetes_cluster_role_binding" "tiller" {
     metadata {
         name = "tiller-binding"
@@ -34,6 +38,9 @@ resource "kubernetes_cluster_role_binding" "tiller" {
     }
 }
 
+# Some services need to be installed at a cluster level
+# So we have a seperate service account in the kube-system
+# namespace with cluster admin role
 resource "kubernetes_service_account" "clustertiller" {
   metadata {
     name = "clustertiller"
