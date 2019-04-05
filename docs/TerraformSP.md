@@ -12,7 +12,7 @@ Now to create a Service Principal we will actually create a new "App" by followi
 
 - Under the Azure AD click on "App registrations"
 
-![App registration](/images/appreg.PNG)
+![App registration](./images/appreg.PNG)
 
 - Now click "New application registration"
 
