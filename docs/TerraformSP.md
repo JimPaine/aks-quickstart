@@ -12,20 +12,20 @@ Now to create a Service Principal we will actually create a new "App" by followi
 
 - Under the Azure AD click on "App registrations"
 
-![App registration](/images/appreg.PNG)
+![App registration](images/appreg.PNG)
 
 - Now click "New application registration"
 
-![New App registration](/images/newapp.PNG)
+![New App registration](images/newapp.PNG)
 
 - Populate the detail in the form and hit "Create"
 - You can set the sign-on URL to any valid URL as we won't need it.
 
-![Create App registration](/images/createapp.PNG)
+![Create App registration](images/createapp.PNG)
 
 - Make note of the "Application ID" as this will be used for our "client_ID" later on.
 
-![App ID](/images/appid.PNG)
+![App ID](images/appid.PNG)
 
 ## Step 2 - Azure AD Permissions
 
@@ -33,24 +33,24 @@ Once the Service Principal has been created we need to assign it some permission
 
 - Click on "Settings"
 
-![App Settings](/images/appsettings.PNG)
+![App Settings](images/appsettings.PNG)
 
 - Now click "Required permissions"
 
-![Required permissions](/images/permissions.PNG)
+![Required permissions](images/permissions.PNG)
 
 - Then Click "Windows Azure Active Directory"
 
-![Windows Azure Active Directory](/images/windowsaad.PNG)
+![Windows Azure Active Directory](images/windowsaad.PNG)
 
 - Now we need to enable "Read and write all applications"
 - Note it highlights this will need to be granted by an Admin before it is applied
 
-![Enable access](/images/enableaccess.PNG)
+![Enable access](images/enableaccess.PNG)
 
 - Now grant the given permissions
 
-![Grant access](/images/grant.PNG)
+![Grant access](images/grant.PNG)
 
 Now your service principal to create other service principals, which is key for this demo.
 
@@ -60,15 +60,15 @@ Now we need to create a password that our service principal will use to authenti
 
 - Still under settings click on "Keys"
 
-![Keys](/images/keys.PNG)
+![Keys](images/keys.PNG)
 
 - Now enter a value for the description and a duration for the expiry
 
-![Set Password](/images/setpass.PNG)
+![Set Password](images/setpass.PNG)
 
 - Click "Save" and make note of the value that is generated this will be used as our "client_secret" later.
 
-![value](/images/value.PNG)
+![value](images/value.PNG)
 
 ## Step 4 - Azure Subscription Access
 
@@ -76,16 +76,16 @@ Within the Azure portal navigate to "Subscriptions" and find the subscription yo
 
 - Click on "Access control (IAM)"
 
-![IAM](/images/iam.PNG)
+![IAM](images/iam.PNG)
 
 - Now click on "Add a role assignment"
 
-![Add role assignment](/images/addrole.PNG)
+![Add role assignment](images/addrole.PNG)
 
 - Select "Owner" for the role
 - And search and select your Service Principal
 
-![Fill form](/images/fillform.PNG)
+![Fill form](images/fillform.PNG)
 
 
 ## Summary
