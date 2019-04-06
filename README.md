@@ -26,7 +26,6 @@ This quick start is aimed to take the provisioning of AKS beyond a simple "az ak
     - Container Insights through Azure Monitor
 
 
-
 ## Backlog
 
 - Switch to use Nginx (Used by more customers)
@@ -38,11 +37,21 @@ This quick start is aimed to take the provisioning of AKS beyond a simple "az ak
 - Policies
 - Move Service Principal role assignment to Subnet rather than the whole Resource Group
 
-## Docs
+## Learnings
+
+- [RBAC](/docs/rbac.md)
+- Private IP
+    - Role Assignment
+    - Service Annotations
+    - Link to IP limit details
+- SSL With ACME & Let's Encrypt
+    - Details 
+
+## Get up and running
 
 Start by cloning or forking this repository, we will then setup Terraform with a Service Principal and a remote storage account, so we can automate the provisioning of the environment.
 
-## Steps
+### Steps
 
 - [1. Terraform Service Principal](/docs/TerraformSP.md)
 - [2. Terraform State](/docs/TerraformState.md)
