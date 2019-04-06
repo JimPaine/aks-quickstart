@@ -41,6 +41,7 @@ Follow the steps above again for this second variable group.
 | tfstate_resource_group     | The resource group where you created the storage account |
 | tfstate_storage_account    | The name of the storage account                          |
 | tfstate_container          | The name of the BLOB container                           |
+| tfstate_access_key         | The storage key for accessing the storage account        |
 
 
 ## Create the pipeline
