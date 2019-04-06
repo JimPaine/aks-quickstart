@@ -44,8 +44,7 @@ This quick start is aimed to take the provisioning of AKS beyond a simple "az ak
     - Role Assignment
     - Service Annotations
     - Link to IP limit details
-- SSL With ACME & Let's Encrypt
-    - Details 
+- [SSL With ACME & Let's Encrypt](/docs/acme.md)
 
 ## Get up and running
 
