@@ -24,6 +24,8 @@ This quick start is aimed to take the provisioning of AKS beyond a simple "az ak
     - Prometheus
     - Grafana
     - Container Insights through Azure Monitor
+- [Demo App](https://aks.jim.cloud/values/swagger)
+    - [yaml](/apps/deployment.yaml)
 
 
 ## Backlog
@@ -31,7 +33,6 @@ This quick start is aimed to take the provisioning of AKS beyond a simple "az ak
 - Switch to use Nginx (Used by more customers)
 - Include Pod Identity
 - Once Pod Identity is included switch to use App Gateway as ingress controller
-- Demo apps
 - Azure AD SPs for Container Registry RBAC. Reader for cluster and Contributor for DevOps Pipeline
 - Dev Spaces
 - Policies
