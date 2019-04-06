@@ -39,3 +39,10 @@ steps:
   workingDirectory: ./env
   displayName: 'Terraform apply'
 
+- script: |
+   terraform output kube_config > .kubeconfig
+   kubectl apply -f ../apps/deployment.yaml --namespace dev --kubeconfig .kubeconfig
+
+  workingDirectory: ./env
+  displayName: 'kubectl apply'
+
