@@ -23,7 +23,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     }
   }
 
-  kubernetes_version = "1.12.6"
+  kubernetes_version = "1.12.7"
 
   agent_pool_profile {
     name            = "default"
