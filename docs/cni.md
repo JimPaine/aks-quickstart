@@ -13,7 +13,7 @@ That being said there is loads we can do already, like:
 
 So lets take a look at how we go a head and implement AKS with CNI.
 
-## Create a subent 
+## Create a subnet 
 
 It is worth reading through the [prerequisites](https://docs.microsoft.com/en-us/azure/aks/configure-azure-cni#prerequisites) as there are a few things to keep in mind, especially around planning for IPs.
 
