@@ -80,3 +80,57 @@ resource "azurerm_role_assignment" "aks" {
   principal_id       = "${azuread_service_principal.aks.id}"
 }
 ```
+
+## Exposing a Service
+
+So now we have AKS sitting in a subnet we have created and we have given the cluster permission to create a load balancer, what we need to do now is provision a service on a private IP address rather than a public one. In this example I have decided to put all my own services on ClusterIPs, meaning they aren't exposed outside of Kubernetes, then use an ingress controller such as Traefik or Nginx to expose specific services.
+
+### It's all in the annotations
+
+The first thing you need is to add an ingress controller like I mentioned earlier and add an annotation telling it to use a private IP address and an Azure load balancer, here is a snippet from my [terraform](/env/traefik.tf)
+
+Here we are saying the service should create and use an Azure load balancer, hence the Network Contributor role we needed to set [here](/docs/rbac.md)
+
+```
+service:
+          annotations:
+            service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+```
+
+I am also giving it a specific private IP within the range of the defined subnet, allowing me to setup my Application Gateway rules.
+
+```
+  set {
+        name = "loadBalancerIP"
+        value = "10.2.1.254"
+    }
+```
+
+Now that our ingress controller is setup on a private IP address we need to add an ingress rule for what we would like to expose. [Here](/apps/deployment.yaml) is my example for my demo app.
+
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: api
+  namespace: dev
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.passHostHeader: "true"
+spec:
+  rules:
+  - host: aks.jim.cloud
+    http:
+      paths:
+      - path: /values
+        backend:
+          serviceName: api
+          servicePort: 80
+```
+
+You can see it is using the Kubernetes kind and schema to define a rule along with a couple of specific annotations specific to my ingress implementation, in this case Traefik.
+
+Now our service is avaiable on https://aks.jim.cloud/values and this specific service on https://aks.jim.cloud/values/api/values
+
+The reason is is exposed over ssl and not on port 80 is because I have an application gateway with WAF sat in front of my ingress controller with ssl offload. 
+

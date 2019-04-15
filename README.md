@@ -41,10 +41,7 @@ This quick start is aimed to take the provisioning of AKS beyond a simple "az ak
 ## Learnings
 
 - [RBAC](/docs/rbac.md)
-- Private IP
-    - Role Assignment
-    - Service Annotations
-    - Link to IP limit details
+- [Private IP](/docs/cni.md)
 - [SSL With ACME & Let's Encrypt](/docs/acme.md)
 
 ## Get up and running
