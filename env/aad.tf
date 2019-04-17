@@ -3,7 +3,7 @@ resource "azuread_application" "aks" {
   name                       = "${var.resource_name}${random_id.aks.dec}"
   homepage                   = "https://homepage${random_id.aks.dec}"
   identifier_uris            = ["https://uri${random_id.aks.dec}"]
-  reply_urls                 = ["https://replyurl${random_id.aks.dec}"]
+  reply_urls                 = ["https://uri${random_id.aks.dec}"]
   available_to_other_tenants = false
   oauth2_allow_implicit_flow = true
 }
