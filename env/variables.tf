@@ -17,3 +17,7 @@ variable "domain" {
 variable "email" {
   
 }
+
+variable "sub_domain" {
+    default = "aks"
+}

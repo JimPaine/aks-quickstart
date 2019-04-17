@@ -1,6 +1,6 @@
 resource "dnsimple_record" "aks" {
   domain = "${var.domain}"
-  name   = "aks"
+  name   = "${var.sub_domain}"
   value  = "${azurerm_public_ip.gateway.fqdn}"
   type   = "CNAME"
   ttl    = 3600
