@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "aks" {
-  name     = "aks"
+  name     = "${var.resource_name}"
   location = "westeurope"
 }
 

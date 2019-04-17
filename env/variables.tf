@@ -1,4 +1,6 @@
-variable "resource_name" {}
+variable "resource_name" {
+    default = "aks"
+}
 variable "subscription_id" {}
 variable "client_id" {}
 variable "client_secret" {}
