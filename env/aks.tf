@@ -23,7 +23,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     }
   }
 
-  kubernetes_version = "1.12.7"
+  kubernetes_version = "1.13.5"
 
   agent_pool_profile {
     name            = "default"
@@ -46,6 +46,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     dns_service_ip = "10.2.2.254"
     service_cidr = "10.2.2.0/24"
     docker_bridge_cidr = "172.17.0.1/16"
+    network_policy = "calico"
   }
 
   # Enabled RBAC
