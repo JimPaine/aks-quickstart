@@ -7,9 +7,7 @@ variable "client_secret" {}
 variable "tenant_id" {}
 variable "dnsimple_account" {}
 
-variable "dnsimple_auth_token" {
-  
-}
+variable "dnsimple_auth_token" { }
 
 
 variable "domain" {
