@@ -30,7 +30,13 @@ resource "azuread_service_principal_password" "aks" {
 # we need our Service Principal to have access to create resources within the 
 # Subnet AKS is attached to.
 resource "azurerm_role_assignment" "aks" {
-  scope              = "${azurerm_resource_group.aks.id}"
+  scope              = "${azurerm_subnet.aks.id}"
   role_definition_name = "Network Contributor"
+  principal_id       = "${azuread_service_principal.aks.id}"
+}
+
+resource "azurerm_role_assignment" "aksmonitor" {
+  scope              = "${azurerm_kubernetes_cluster.aks.id}"
+  role_definition_name = "Monitoring Metrics Publisher"
   principal_id       = "${azuread_service_principal.aks.id}"
 }
