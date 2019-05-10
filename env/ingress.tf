@@ -20,7 +20,8 @@ resource "helm_release" "nginx" {
           loadBalancerIP: 10.2.1.254
           annotations:
             service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-      rbac: "true"
+      rbac: 
+        enabled: "true"
     VALUES
     ]
 }
