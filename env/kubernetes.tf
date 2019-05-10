@@ -1,4 +1,6 @@
 resource "kubernetes_namespace" "dev" {
+  depends_on = ["${azurerm_kubernetes_cluster.aks}"]
+
   metadata {
     name = "dev"
   }
@@ -15,6 +17,8 @@ locals {
 }
 
 resource "kubernetes_secret" "demo" {
+  depends_on = ["${kubernetes_namespace.dev}"]
+
   metadata {
     name      = "registry"
     namespace = "dev"
@@ -27,4 +31,39 @@ resource "kubernetes_secret" "demo" {
   }
 
   type = "kubernetes.io/dockercfg"
+}
+
+resource "kubernetes_network_policy" "traefik" {
+  depends_on = ["${azurerm_kubernetes_cluster.aks}"]
+
+  metadata {
+    name      = "traefik-network-policy"
+    namespace = "dev"
+  }
+
+  spec {
+    pod_selector {
+      match_labels {
+        app = "api"
+      }
+    }
+
+    ingress = [
+      {
+        from = [
+          {
+            pod_selector {
+              match_labels {
+                app = "traefik"
+              }
+            }
+          },
+        ]
+      },
+    ]
+
+    egress = [{}] # single empty rule to allow all egress traffic
+
+    policy_types = ["Ingress", "Egress"]
+  }
 }
