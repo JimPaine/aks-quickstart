@@ -30,7 +30,7 @@ resource "azuread_service_principal_password" "aks" {
 # we need our Service Principal to have access to create resources within the 
 # Subnet AKS is attached to.
 resource "azurerm_role_assignment" "aks" {
-  scope              = "${azurerm_subnet.aks.id}"
+  scope              = "${azurerm_virtual_network.aks.id}"
   role_definition_name = "Network Contributor"
   principal_id       = "${azuread_service_principal.aks.id}"
 }
