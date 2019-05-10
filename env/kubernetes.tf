@@ -1,5 +1,5 @@
 resource "kubernetes_namespace" "dev" {
-  depends_on = ["${azurerm_kubernetes_cluster.aks}"]
+  depends_on = ["azurerm_kubernetes_cluster.aks"]
 
   metadata {
     name = "dev"
@@ -17,7 +17,7 @@ locals {
 }
 
 resource "kubernetes_secret" "demo" {
-  depends_on = ["${kubernetes_namespace.dev}"]
+  depends_on = ["kubernetes_namespace.dev"]
 
   metadata {
     name      = "registry"
@@ -34,7 +34,7 @@ resource "kubernetes_secret" "demo" {
 }
 
 resource "kubernetes_network_policy" "traefik" {
-  depends_on = ["${azurerm_kubernetes_cluster.aks}"]
+  depends_on = ["azurerm_kubernetes_cluster.aks"]
 
   metadata {
     name      = "traefik-network-policy"
