@@ -12,9 +12,9 @@ resource "kubernetes_cluster_role" "tiller" {
     metadata {
         name = "tiller-manager"
     }
-
+    
     rule {
-        api_groups = ["", "batch", "extensions", "apps"]
+        api_groups = ["", "batch", "extensions", "apps", "clusterroles"]
         resources  = ["*"]
         verbs      = ["*"]
     }
