@@ -42,9 +42,9 @@ provider "tls" {
 
 provider "helm" {
   version = "~> 0.9"
-  service_account = "tiller"
+  service_account = "clustertiller"
   namespace = "dev" 
-  
+
     kubernetes {
       host                   = "${azurerm_kubernetes_cluster.aks.kube_config.0.host}"
       client_certificate     = "${base64decode(azurerm_kubernetes_cluster.aks.kube_config.0.client_certificate)}"
