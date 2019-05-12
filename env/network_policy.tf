@@ -8,18 +8,26 @@ resource "kubernetes_network_policy" "traefik" {
 
   spec {
     pod_selector {
-      match_labels {
+      match_labels = {
         app = "api"
+        namespace = "dev"
       }
     }
 
     ingress = [
       {
+        ports = [
+          {
+            port = "http"
+            protocol = "TCP"
+          }
+        ]
         from = [
           {
             pod_selector {
-              match_labels {
+              match_labels = {
                 app = "traefik"
+                namespace = "dev"
               }
             }
           },
