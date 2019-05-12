@@ -39,7 +39,7 @@ resource "kubernetes_network_policy" "blocked" {
   depends_on = ["azurerm_kubernetes_cluster.aks"]
 
   metadata {
-    name      = "traefik-network-policy"
+    name      = "traefik-block-policy"
     namespace = "dev"
   }
 
