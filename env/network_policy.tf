@@ -20,6 +20,10 @@ resource "kubernetes_network_policy" "traefik" {
           {
             port = "http"
             protocol = "TCP"
+          },
+          {
+            port = "443"
+            protocol = "TCP"
           }
         ]
         from = [
