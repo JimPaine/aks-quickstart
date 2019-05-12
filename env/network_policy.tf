@@ -10,7 +10,6 @@ resource "kubernetes_network_policy" "traefik" {
     pod_selector {
       match_labels = {
         app = "api"
-        namespace = "dev"
       }
     }
 
@@ -20,10 +19,6 @@ resource "kubernetes_network_policy" "traefik" {
           {
             port = "http"
             protocol = "TCP"
-          },
-          {
-            port = "443"
-            protocol = "TCP"
           }
         ]
         from = [
@@ -31,7 +26,6 @@ resource "kubernetes_network_policy" "traefik" {
             pod_selector {
               match_labels = {
                 app = "traefik"
-                namespace = "dev"
               }
             }
           },
