@@ -34,3 +34,26 @@ resource "kubernetes_network_policy" "traefik" {
     policy_types = ["Ingress", "Egress"]
   }
 }
+
+resource "kubernetes_network_policy" "blocked" {
+  depends_on = ["azurerm_kubernetes_cluster.aks"]
+
+  metadata {
+    name      = "traefik-network-policy"
+    namespace = "dev"
+  }
+
+  spec {
+    pod_selector {
+      match_labels = {
+        app = "blocked"
+      }
+    }
+
+    ingress = []
+
+    egress = []
+
+    policy_types = ["Ingress", "Egress"]
+  }
+}

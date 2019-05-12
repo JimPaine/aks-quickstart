@@ -21,11 +21,13 @@ This quick start is aimed to take the provisioning of AKS beyond a simple "az ak
 - Creation and assignment of DNS record
 - Creation and assignment of Let's Encrypt certificate to App Gateway
 - Monitoring solutions installed
-    - Prometheus
-    - Grafana
     - Container Insights through Azure Monitor
+    - Monitoring Metrics Publisher
 - [Demo App](https://aks.jim.cloud/values/swagger)
     - [yaml](/apps/deployment.yaml)
+- Network Policy
+    - Accepted policy for Traefik -> api
+    - Blocked policy for Traefik -> blocked
 
 
 ## Backlog
@@ -35,7 +37,6 @@ This quick start is aimed to take the provisioning of AKS beyond a simple "az ak
 - Once Pod Identity is included switch to use App Gateway as ingress controller
 - Azure AD SPs for Container Registry RBAC. Reader for cluster and Contributor for DevOps Pipeline
 - Dev Spaces
-- Policies
 - Move Service Principal role assignment to Subnet rather than the whole Resource Group
 
 ## Learnings
