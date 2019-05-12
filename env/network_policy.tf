@@ -23,6 +23,8 @@ resource "kubernetes_network_policy" "traefik" {
         ]
         from = [
           {
+            namespace_selector { }
+            
             pod_selector {
               match_labels = {
                 app = "traefik"
