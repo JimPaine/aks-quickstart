@@ -24,6 +24,18 @@ steps:
   displayName: 'Install Helm 2.9.1'
 
 - script: |
+   helm repo add kedacore https://kedacore.azureedge.net/helm
+
+  workingDirectory: ./env
+  displayName: 'helm repo add'
+
+- script: |
+   helm repo update
+
+  workingDirectory: ./env
+  displayName: 'helm repo update'
+
+- script: |
    terraform init \
        -backend-config="resource_group_name=$(tfstate_resource_group)" \
        -backend-config="storage_account_name=$(tfstate_storage_account)" \
@@ -54,21 +66,3 @@ steps:
 
   workingDirectory: ./env
   displayName: 'kubectl apply - blocked'
-
-- script: |
-   helm repo add kedacore https://kedacore.azureedge.net/helm
-
-  workingDirectory: ./env
-  displayName: 'helm repo add'
-
-- script: |
-   helm repo update
-
-  workingDirectory: ./env
-  displayName: 'helm repo update'
-
-- script: |
-   helm install kedacore/keda-edge --devel --set logLevel=debug --namespace keda --name keda
-
-  workingDirectory: ./env
-  displayName: 'Install KEDA'
