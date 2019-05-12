@@ -6,6 +6,14 @@ resource "kubernetes_namespace" "dev" {
   }
 }
 
+resource "kubernetes_namespace" "keda" {
+  depends_on = ["azurerm_kubernetes_cluster.aks"]
+
+  metadata {
+    name = "keda"
+  }
+}
+
 locals {
   dockercfg = {
     "${azurerm_container_registry.aks.login_server}" = {

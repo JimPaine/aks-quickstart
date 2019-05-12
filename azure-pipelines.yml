@@ -46,12 +46,29 @@ steps:
    kubectl apply -f ../apps/allowed.yaml --namespace dev --kubeconfig .kubeconfig
 
   workingDirectory: ./env
-  displayName: 'kubectl apply'
+  displayName: 'kubectl apply - allowed'
 
 - script: |
    terraform output kube_config > .kubeconfig
    kubectl apply -f ../apps/blocked.yaml --namespace dev --kubeconfig .kubeconfig
 
   workingDirectory: ./env
-  displayName: 'kubectl apply'
+  displayName: 'kubectl apply - blocked'
 
+- script: |
+   helm repo add kedacore https://kedacore.azureedge.net/helm
+
+  workingDirectory: ./env
+  displayName: 'helm repo add'
+
+- script: |
+   helm repo update
+
+  workingDirectory: ./env
+  displayName: 'helm repo update'
+
+- script: |
+   helm install kedacore/keda-edge --devel --set logLevel=debug --namespace keda --name keda
+
+  workingDirectory: ./env
+  displayName: 'Install KEDA'
