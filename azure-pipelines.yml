@@ -43,7 +43,14 @@ steps:
 
 - script: |
    terraform output kube_config > .kubeconfig
-   kubectl apply -f ../apps/deployment.yaml --namespace dev --kubeconfig .kubeconfig
+   kubectl apply -f ../apps/allowed.yaml --namespace dev --kubeconfig .kubeconfig
+
+  workingDirectory: ./env
+  displayName: 'kubectl apply'
+
+- script: |
+   terraform output kube_config > .kubeconfig
+   kubectl apply -f ../apps/blocked.yaml --namespace dev --kubeconfig .kubeconfig
 
   workingDirectory: ./env
   displayName: 'kubectl apply'
