@@ -13,27 +13,7 @@ resource "kubernetes_network_policy" "traefik" {
       }
     }
 
-    ingress = [
-      {
-        ports = [
-          {
-            port = "http"
-            protocol = "TCP"
-          }
-        ]
-        from = [
-          {
-            namespace_selector { }
-            
-            pod_selector {
-              match_labels = {
-                app = "traefik"
-              }
-            }
-          },
-        ]
-      },
-    ]
+    ingress = [{}]
 
     egress = [{}] # single empty rule to allow all egress traffic
 
