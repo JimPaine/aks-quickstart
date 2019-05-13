@@ -29,7 +29,6 @@ This quick start is aimed to take the provisioning of AKS beyond a simple "az ak
     - Accepted policy for Traefik -> api
     - Blocked policy for Traefik -> blocked
 
-
 ## Backlog
 
 - Switch to use Nginx (Used by more customers)
