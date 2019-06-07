@@ -31,6 +31,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vm_size         = "Standard_B2s"
     os_type         = "Linux"
     os_disk_size_gb = 30
+    type = "VirtualMachineScaleSets"
 
     # Attach the AKS cluster to the subnet within the VNet we have created
     vnet_subnet_id = "${azurerm_subnet.aks.id}"
@@ -42,6 +43,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vm_size         = "Standard_B2s"
     os_type         = "Windows"
     os_disk_size_gb = 30
+    type = "VirtualMachineScaleSets"
 
     # Attach the AKS cluster to the subnet within the VNet we have created
     vnet_subnet_id = "${azurerm_subnet.aks.id}"
