@@ -27,9 +27,20 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   agent_pool_profile {
     name            = "default"
-    count           = 3
+    count           = 1
     vm_size         = "Standard_B2s"
     os_type         = "Linux"
+    os_disk_size_gb = 30
+
+    # Attach the AKS cluster to the subnet within the VNet we have created
+    vnet_subnet_id = "${azurerm_subnet.aks.id}"
+  }
+
+   agent_pool_profile {
+    name            = "default"
+    count           = 1
+    vm_size         = "Standard_B2s"
+    os_type         = "Windows"
     os_disk_size_gb = 30
 
     # Attach the AKS cluster to the subnet within the VNet we have created
