@@ -26,7 +26,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   kubernetes_version = "1.14.0"
 
   agent_pool_profile {
-    name            = "linux"
+    name            = "linux0"
     count           = 1
     vm_size         = "Standard_B2s"
     os_type         = "Linux"
@@ -38,10 +38,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
    agent_pool_profile {
-    name            = "windows"
+    name            = "linux1"
     count           = 1
     vm_size         = "Standard_B2s"
-    os_type         = "Windows"
+    os_type         = "Linux"
     os_disk_size_gb = 30
     type = "VirtualMachineScaleSets"
 
