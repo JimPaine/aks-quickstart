@@ -23,22 +23,18 @@ steps:
 - task: HelmInstaller@0
   displayName: 'Install Helm 2.9.1'
 
-- script: |
-   helm repo add kedacore https://kedacore.azureedge.net/helm
-
+- script: helm repo add kedacore https://kedacore.azureedge.net/helm
   workingDirectory: ./env
   displayName: 'helm add keda repo'
 
-- script: |
-   helm repo add osiris https://osiris.azurecr.io/helm/v1/repo --username eae9749a-fccf-4a24-ac0d-6506fe2a6ab3 --password 2fc6a721-85e4-41ca-933d-2ca02e1394c4
-
+- script: helm repo add osiris https://osiris.azurecr.io/helm/v1/repo --username eae9749a-fccf-4a24-ac0d-6506fe2a6ab3 --password 2fc6a721-85e4-41ca-933d-2ca02e1394c4
   workingDirectory: ./env
   displayName: 'helm add osiris repo'
   
-
-- script: |
-   helm repo update
-
+- script: az extension add --name aks-preview
+  displayName: 'Add aks preview extension'
+  
+- script: helm repo update
   workingDirectory: ./env
   displayName: 'helm repo update'
 
