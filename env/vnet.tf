@@ -11,3 +11,10 @@ resource "azurerm_subnet" "aks" {
   address_prefix       = "10.2.1.0/24"
   virtual_network_name = "${azurerm_virtual_network.aks.name}"
 }
+
+resource "azurerm_subnet" "virtual" {
+  name                 = "aksvirtual"
+  resource_group_name  = "${azurerm_resource_group.aks.name}"
+  address_prefix       = "10.2.3.0/24"
+  virtual_network_name = "${azurerm_virtual_network.aks.name}"
+}
