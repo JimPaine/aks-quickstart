@@ -24,4 +24,5 @@ resource "azurerm_subnet" "virtual" {
       name    = "Microsoft.ContainerInstance/containerGroups"
       actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
     }
+  }
 }
