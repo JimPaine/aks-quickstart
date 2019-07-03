@@ -37,9 +37,17 @@ steps:
 - script: helm repo update
   workingDirectory: ./env
   displayName: 'helm repo update'
+  
+- script: |
+    wget https://releases.hashicorp.com/terraform/0.11.14/terraform_0.11.14_linux_amd64.zip
+    unzip terraform_0.11.14_linux_amd64.zip
+    chmod +x terraform
+    
+  workingDirectory: ./env
+  displayName: 'Download Terraform'
 
 - script: |
-   terraform init \
+   ./terraform init \
        -backend-config="resource_group_name=$(tfstate_resource_group)" \
        -backend-config="storage_account_name=$(tfstate_storage_account)" \
        -backend-config="container_name=$(tfstate_container)" \
@@ -50,21 +58,21 @@ steps:
   displayName: 'Terraform init'
 
 - script: |
-   terraform apply -auto-approve \
+   ./terraform apply -auto-approve \
        -var-file="terraform.tfvars"
 
   workingDirectory: ./env
   displayName: 'Terraform apply'
 
 - script: |
-   terraform output kube_config > .kubeconfig
+   ./terraform output kube_config > .kubeconfig
    kubectl apply -f ../apps/allowed.yaml --namespace dev --kubeconfig .kubeconfig
 
   workingDirectory: ./env
   displayName: 'kubectl apply - allowed'
 
 - script: |
-   terraform output kube_config > .kubeconfig
+   ./terraform output kube_config > .kubeconfig
    kubectl apply -f ../apps/blocked.yaml --namespace dev --kubeconfig .kubeconfig
 
   workingDirectory: ./env
